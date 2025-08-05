@@ -6,8 +6,6 @@ namespace Loops_Opgaver
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-
             // Example MultiplicationTable:
             PrintMultiplicationTable();
 
