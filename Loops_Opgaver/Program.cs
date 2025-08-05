@@ -20,8 +20,16 @@ namespace Loops_Opgaver
             // Example Two7sNextToEachOther: (arr er kort for array)
             int[] arr1 = { 8, 2, 5, 7, 9, 0, 7, 7, 3, 1 };
             int[] arr2 = { 9, 4, 5, 3, 7, 7, 7, 3, 2, 5, 7, 7 };
-            Console.WriteLine($"Two7sNextToEachOther(arr1) = {Two7sNextToEachOther(arr1)}");
-            Console.WriteLine($"Two7sNextToEachOther(arr2) = {Two7sNextToEachOther(arr2)}");
+            Console.WriteLine($"7sNextToEachOther1 = {Two7sNextToEachOther(arr1)}");
+            Console.WriteLine($"7sNextToEachOther2 = {Two7sNextToEachOther(arr2)}");
+
+            // Example ThreeIncreasingAdjacent:
+            int[] sequence1 = { 1, 2, 3, 4, 5 };
+            int[] sequence2 = { 5, 6, 7, 8, 9 };
+            int[] sequence3 = { 1, 3, 2, 4, 5 };
+            Console.WriteLine($"Saetning1 = {ThreeIncreasingAdjacent(sequence1)}");
+            Console.WriteLine($"Saetning2 = {ThreeIncreasingAdjacent(sequence2)}");
+            Console.WriteLine($"Saetning3 = {ThreeIncreasingAdjacent(sequence3)}");
         }
 
         static void PrintMultiplicationTable()
@@ -63,6 +71,22 @@ namespace Loops_Opgaver
                     count++;
             }
             return count;
+        }
+
+        static bool ThreeIncreasingAdjacent(int[] numbers)
+        {
+            if (numbers == null || numbers.Length < 3)
+                return false;
+
+            for (int i = 0; i < numbers.Length - 2; i++)
+            {
+                if (numbers[i + 1] == numbers[i] + 1 &&
+                    numbers[i + 2] == numbers[i + 1] + 1)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
