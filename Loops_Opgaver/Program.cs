@@ -28,6 +28,12 @@ namespace Loops_Opgaver
             Console.WriteLine($"Saetning1 = {ThreeIncreasingAdjacent(sequence1)}");
             Console.WriteLine($"Saetning2 = {ThreeIncreasingAdjacent(sequence2)}");
             Console.WriteLine($"Saetning3 = {ThreeIncreasingAdjacent(sequence3)}");
+
+            // Example SieveOfEratosthenes:
+            int n = 30;
+            int primeCount = SieveOfEratosthenes(n);
+            Console.WriteLine($"Number of primenumbers to {n} = {primeCount}");
+
         }
 
         static void PrintMultiplicationTable()
@@ -85,6 +91,31 @@ namespace Loops_Opgaver
                 }
             }
             return false;
+        }
+
+        static int SieveOfEratosthenes(int n)
+        {
+            if (n < 2) return 0;
+            bool[] isPrime = new bool[n + 1];
+            for (int i = 2; i <= n; i++)
+                isPrime[i] = true;
+            for (int p = 2; p * p <= n; p++)
+            {
+                if (isPrime[p])
+                {
+                    for (int multiple = p * p; multiple <= n; multiple += p)
+                    {
+                        isPrime[multiple] = false;
+                    }
+                }
+            }
+            int count = 0;
+            for (int i = 2; i <= n; i++)
+            {
+                if (isPrime[i])
+                    count++;
+            }
+            return count;
         }
     }
 }
