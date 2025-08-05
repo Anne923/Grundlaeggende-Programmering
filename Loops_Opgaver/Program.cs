@@ -117,5 +117,16 @@ namespace Loops_Opgaver
             }
             return count;
         }
+
+        static string ExtractString(string input, int start, int length)
+        {
+            if (input == null)
+                throw new ArgumentNullException(nameof(input), "Input cannot be null.");
+            if (start < 0 || start >= input.Length)
+                throw new ArgumentOutOfRangeException(nameof(start), "Start index is out of range.");
+            if (length < 0 || start + length > input.Length)
+                throw new ArgumentOutOfRangeException(nameof(length), "Length is out of range.");
+            return input.Substring(start, length);
+        }
     }
 }
