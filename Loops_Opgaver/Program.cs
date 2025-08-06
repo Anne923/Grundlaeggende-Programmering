@@ -51,6 +51,9 @@ namespace Loops_Opgaver
             // Example DrawTriangle:
             DrawTriangle(10);
 
+            // Example ToThePowerOf:
+            Console.WriteLine(ToThePowerOf(-2, 3));
+            Console.WriteLine(ToThePowerOf(5, 5));
         }
 
         static void PrintMultiplicationTable()
@@ -199,6 +202,25 @@ namespace Loops_Opgaver
                 string stars = new string('*', 2 * i - 1);
                 Console.WriteLine(spaces + stars);
             }
+        }
+
+        static int ToThePowerOf(int baseNum, int exponent)
+        {
+            if (exponent == 0)
+                return 1;
+
+            int result = 1;
+            int absExponent = Math.Abs(exponent);
+
+            for (int i = 0; i < absExponent; i++)
+            {
+                result *= baseNum;
+            }
+
+            if (exponent < 0)
+                return 0;
+
+            return result;
         }
     }
 }
