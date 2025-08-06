@@ -39,6 +39,10 @@ namespace Loops_Opgaver
             Console.WriteLine(ExtractString("12###78"));
             Console.WriteLine(ExtractString("gar##d#en"));
             Console.WriteLine(ExtractString("++##--##++"));
+
+            // Example FullSequenceOfLetters:
+            Console.WriteLine(FullSequenceOfLetters("ds"));
+            Console.WriteLine(FullSequenceOfLetters("or"));
         }
 
         static void PrintMultiplicationTable()
@@ -141,6 +145,25 @@ namespace Loops_Opgaver
                 return string.Empty;
 
             return input.Substring(first + 2, second - (first + 2));
+        }
+
+        static string FullSequenceOfLetters(string input)
+        {
+            if (string.IsNullOrEmpty(input) || input.Length != 2)
+                return string.Empty;
+
+            char start = input[0];
+            char end = input[1];
+
+            if (!char.IsLetter(start) || !char.IsLetter(end) || start > end)
+                return string.Empty;
+
+            var result = new System.Text.StringBuilder();
+            for (char c = start; c <= end; c++)
+            {
+                result.Append(c);
+            }
+            return result.ToString();
         }
     }
 }
