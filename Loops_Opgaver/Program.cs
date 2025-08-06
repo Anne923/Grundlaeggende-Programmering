@@ -48,6 +48,9 @@ namespace Loops_Opgaver
             Console.WriteLine(SumAndAverage(11, 60));
             Console.WriteLine(SumAndAverage(-10, 0));
 
+            // Example DrawTriangle:
+            DrawTriangle(10);
+
         }
 
         static void PrintMultiplicationTable()
@@ -131,7 +134,7 @@ namespace Loops_Opgaver
             }
             return count;
         }
-        
+
         static string ExtractString(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -145,7 +148,7 @@ namespace Loops_Opgaver
             if (second == -1)
                 return string.Empty;
 
-            
+
             if (second == first + 2)
                 return string.Empty;
 
@@ -184,6 +187,18 @@ namespace Loops_Opgaver
             }
             double average = (double)sum / count;
             return $"Sum: {sum}, Average: {average}";
+        }
+
+        static void DrawTriangle(int height)
+        {
+            if (height < 1)
+                throw new ArgumentException("Height must be at least 1.", nameof(height));
+            for (int i = 1; i <= height; i++)
+            {
+                string spaces = new string(' ', height - i);
+                string stars = new string('*', 2 * i - 1);
+                Console.WriteLine(spaces + stars);
+            }
         }
     }
 }
