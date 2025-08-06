@@ -34,6 +34,11 @@ namespace Loops_Opgaver
             int primeCount = SieveOfEratosthenes(n);
             Console.WriteLine($"Number of primenumbers to {n} = {primeCount}");
 
+            // Example ExtractString:
+            Console.WriteLine(ExtractString("##abc##def"));
+            Console.WriteLine(ExtractString("12###78"));
+            Console.WriteLine(ExtractString("gar##d#en"));
+            Console.WriteLine(ExtractString("++##--##++"));
         }
 
         static void PrintMultiplicationTable()
@@ -117,16 +122,25 @@ namespace Loops_Opgaver
             }
             return count;
         }
-
-        static string ExtractString(string input, int start, int length)
+        
+        static string ExtractString(string input)
         {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input), "Input cannot be null.");
-            if (start < 0 || start >= input.Length)
-                throw new ArgumentOutOfRangeException(nameof(start), "Start index is out of range.");
-            if (length < 0 || start + length > input.Length)
-                throw new ArgumentOutOfRangeException(nameof(length), "Length is out of range.");
-            return input.Substring(start, length);
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+
+            int first = input.IndexOf("##");
+            if (first == -1)
+                return string.Empty;
+
+            int second = input.IndexOf("##", first + 2);
+            if (second == -1)
+                return string.Empty;
+
+            
+            if (second == first + 2)
+                return string.Empty;
+
+            return input.Substring(first + 2, second - (first + 2));
         }
     }
 }
