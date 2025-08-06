@@ -43,6 +43,11 @@ namespace Loops_Opgaver
             // Example FullSequenceOfLetters:
             Console.WriteLine(FullSequenceOfLetters("ds"));
             Console.WriteLine(FullSequenceOfLetters("or"));
+
+            // Example SumAndAverage:
+            Console.WriteLine(SumAndAverage(11, 60));
+            Console.WriteLine(SumAndAverage(-10, 0));
+
         }
 
         static void PrintMultiplicationTable()
@@ -164,6 +169,21 @@ namespace Loops_Opgaver
                 result.Append(c);
             }
             return result.ToString();
+        }
+
+        static string SumAndAverage(int n, int m)
+        {
+            if (n > m)
+                throw new ArgumentException("n must be less than or equal to m.");
+
+            int count = m - n + 1;
+            int sum = 0;
+            for (int i = n; i <= m; i++)
+            {
+                sum += i;
+            }
+            double average = (double)sum / count;
+            return $"Sum: {sum}, Average: {average}";
         }
     }
 }
