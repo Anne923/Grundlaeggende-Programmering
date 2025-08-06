@@ -22,12 +22,10 @@ namespace Loops_Opgaver
             Console.WriteLine($"7sNextToEachOther2 = {Two7sNextToEachOther(arr2)}");
 
             // Example ThreeIncreasingAdjacent:
-            int[] sequence1 = { 1, 2, 3, 4, 5 };
-            int[] sequence2 = { 5, 6, 7, 8, 9 };
-            int[] sequence3 = { 1, 3, 2, 4, 5 };
+            int[] sequence1 = { 45, 23, 44, 68, 65, 70, 80, 81, 82 };
+            int[] sequence2 = { 7, 3, 5, 8, 9, 3, 1, 4 };
             Console.WriteLine($"Saetning1 = {ThreeIncreasingAdjacent(sequence1)}");
             Console.WriteLine($"Saetning2 = {ThreeIncreasingAdjacent(sequence2)}");
-            Console.WriteLine($"Saetning3 = {ThreeIncreasingAdjacent(sequence3)}");
 
             // Example SieveOfEratosthenes:
             int n = 30;
@@ -97,7 +95,7 @@ namespace Loops_Opgaver
             return count;
         }
 
-        static bool ThreeIncreasingAdjacent(int[] numbers)
+        public static bool ThreeIncreasingAdjacent(int[] numbers)
         {
             if (numbers == null || numbers.Length < 3)
                 return false;
