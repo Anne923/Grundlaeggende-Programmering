@@ -83,7 +83,7 @@ namespace Loops_Opgaver
             return max;
         }
 
-        static int Two7sNextToEachOther(int[] digits)
+        public static int Two7sNextToEachOther(int[] digits)
         {
             if (digits == null || digits.Length < 2)
                 return 0;
