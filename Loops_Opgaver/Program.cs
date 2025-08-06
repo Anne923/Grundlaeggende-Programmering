@@ -2,7 +2,7 @@
 
 namespace Loops_Opgaver
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -69,7 +69,7 @@ namespace Loops_Opgaver
             }
         }
 
-        static int TheBiggestNumber(int[] numbers)
+        public static int TheBiggestNumber(int[] numbers)
         {
             if (numbers == null || numbers.Length == 0)
                 throw new ArgumentException("Array must not be null or empty.", nameof(numbers));
