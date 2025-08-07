@@ -11,6 +11,9 @@
             // Example IsPalindrome:
             Console.WriteLine(IsPalindrome("eye"));
             Console.WriteLine(IsPalindrome("home"));
+
+            // Example LengthOfAString:
+            Console.WriteLine(LengthOfAString("Computer"));
         }
 
         static string AddSeparator(string input, string separator)
@@ -46,6 +49,13 @@
             }
 
             return true;
+        }
+
+        static string LengthOfAString(string input)
+        {
+            if (input == null)
+                return "null";
+            return input.Length.ToString();
         }
     }
 }
