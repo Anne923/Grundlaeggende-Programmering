@@ -54,7 +54,7 @@
             return result.ToString();
         }
 
-        static bool IsPalindrome(string input)
+        public static bool IsPalindrome(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return false;
