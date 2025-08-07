@@ -1,6 +1,6 @@
 ﻿namespace ConditionalStatements_Opgaver
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -39,7 +39,7 @@
             Console.WriteLine(IfYearIsLeap(2018));
         }
 
-        static int AbsoluteValue(int number)
+        public static int AbsoluteValue(int number)
         {
             if (number < 0)
             {
@@ -51,7 +51,7 @@
             }
         }
 
-        static int DivisibleBy2Or3(int number, int v)
+        public static int DivisibleBy2Or3(int number, int v)
         {
             bool numberDivisible = number % 2 == 0 || number % 3 == 0;
             bool vDivisible = v % 2 == 0 || v % 3 == 0;
@@ -66,7 +66,7 @@
             }
         }
 
-        static bool IfConsistsOfUppercaseLetters(string input)
+        public static bool IfConsistsOfUppercaseLetters(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
