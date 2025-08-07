@@ -28,6 +28,15 @@
             // Example IfSortedAscending:
             Console.WriteLine(IfSortedAscending(new int[] { 3, 7, 10 }));
             Console.WriteLine(IfSortedAscending(new int[] { 74, 62, 99 }));
+
+            // Example PositiveNegativeOrZero:
+            Console.WriteLine(PositiveNegativeOrZero(5.24));
+            Console.WriteLine(PositiveNegativeOrZero(0.0));
+            Console.WriteLine(PositiveNegativeOrZero(-994.53));
+
+            // Example IfYearIsLeap:
+            Console.WriteLine(IfYearIsLeap(2016));
+            Console.WriteLine(IfYearIsLeap(2018));
         }
 
         static int AbsoluteValue(int number)
@@ -117,6 +126,37 @@
             return true;
         }
 
-        static int 
+        static string PositiveNegativeOrZero(double number)
+        {
+            if (number > 0)
+            {
+                return "positive";
+            }
+            else if (number < 0)
+            {
+                return "negative";
+            }
+            else
+            {
+                return "zero";
+            }
+        }
+
+        static bool IfYearIsLeap(int year)
+        {
+            if (year < 0)
+            {
+                throw new ArgumentException("Year cannot be negative.");
+            }
+            if (year % 4 == 0)
+            {
+                if (year % 100 == 0)
+                {
+                    return year % 400 == 0;
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
