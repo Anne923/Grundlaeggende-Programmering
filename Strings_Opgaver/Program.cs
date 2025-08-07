@@ -1,6 +1,6 @@
 ﻿namespace Strings_Opgaver
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -24,9 +24,21 @@
             // Example RevertWordsOrder:
             Console.WriteLine(RevertWordsOrder("John Doe."));
             Console.WriteLine(RevertWordsOrder("A. B. C"));
+
+            // Example HowManyOccurrences:
+            Console.WriteLine(HowManyOccurrences("banana", 'a'));
+            Console.WriteLine(HowManyOccurrences("Elephant", 'b'));
+
+            // Example SortCharacterDescending:
+            Console.WriteLine(SortCharacterDescending("mankdejg"));
+            Console.WriteLine(SortCharacterDescending("lpowert"));
+
+            // Example CompressString:
+            Console.WriteLine(CompressString("kkkktttrrrrrrrrrr"));
+            Console.WriteLine(CompressString("aabbccddeeffgghhii"));
         }
 
-        static string AddSeparator(string input, string separator)
+        public static string AddSeparator(string input, string separator)
         {
             if (string.IsNullOrEmpty(input) || separator == null)
                 return input;
@@ -96,6 +108,54 @@
             var words = input.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             Array.Reverse(words);
             return string.Join(" ", words);
+        }
+
+        static string HowManyOccurrences(string input, char character)
+        {
+            if (string.IsNullOrEmpty(input))
+                return "0";
+            int count = 0;
+            foreach (var ch in input)
+            {
+                if (ch == character)
+                    count++;
+            }
+            return count.ToString();
+        }
+
+        static string SortCharacterDescending(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+            char[] characters = input.ToCharArray();
+            Array.Sort(characters);
+            Array.Reverse(characters);
+            return new string(characters);
+        }
+
+        static string CompressString(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+            var result = new System.Text.StringBuilder();
+            int count = 1;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i + 1 < input.Length && input[i] == input[i + 1])
+                {
+                    count++;
+                }
+                else
+                {
+                    result.Append(input[i]);
+                    if (count > 1)
+                    {
+                        result.Append(count);
+                    }
+                    count = 1;
+                }
+            }
+            return result.ToString();
         }
     }
 }
