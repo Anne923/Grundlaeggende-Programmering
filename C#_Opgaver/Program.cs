@@ -1,6 +1,6 @@
-﻿namespace C__Opgaver
+﻿namespace Basic_Opgaver
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -37,12 +37,12 @@
         }
 
         // Adds the first two numbers and multiplies the sum by the third number
-        static int AddAndMultiply(int a, int b, int c)
+        public static int AddAndMultiply(int a, int b, int c)
         {
             return (a + b) * c;
         }
 
-        static List<int> ElementaryOperations(int a, int b)
+        public static List<int> ElementaryOperations(int a, int b)
         {
             List<int> results = new List<int>();
             results.Add(a + b); // Addition
