@@ -6,7 +6,7 @@
         {
             Console.WriteLine("Choose program:");
             Console.WriteLine("1 - Dice Game");
-            Console.WriteLine("2 - Mozart Waltz Generator");
+            Console.WriteLine("2 - Mozart Waltz");
             string choice = Console.ReadLine();
 
             if (choice == "1")
