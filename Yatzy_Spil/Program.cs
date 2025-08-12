@@ -5,7 +5,7 @@
         static void Main()
         {
             YatzyGame game = new YatzyGame();
-            game.PlayTurn();
+            game.StartGame();
         }
     }
 }

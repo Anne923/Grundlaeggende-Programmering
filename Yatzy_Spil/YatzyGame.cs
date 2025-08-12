@@ -11,8 +11,18 @@ namespace Yatzy_Spil
         private List<Dice> dice;
         private int rollsLeft = 3;
 
+        private Player player1;
+        private Player player2;
+        private int TurnCount = 0;
+
         public YatzyGame()
         {
+            Console.WriteLine("Enter name for player1: ");
+            player1 = new Player(Console.ReadLine());
+
+            Console.WriteLine("Enter name for player2: ");
+            player2 = new Player(Console.ReadLine());
+
             dice = new List<Dice>();
             for (int i = 0; i < 5; i++)
             {
@@ -20,7 +30,30 @@ namespace Yatzy_Spil
             }
         }
 
-        public void PlayTurn()
+        public void StartGame()
+        {
+            Console.WriteLine("Welcome to Yatzy!");
+            while (TurnCount < 30)
+            {
+                Player currentPlayer = (TurnCount % 2 == 0) ? player1 : player2;
+                Console.WriteLine($"\n {currentPlayer.Name}'s turn!");
+                PlayTurn(currentPlayer);
+                TurnCount++;
+            }
+
+            Console.WriteLine("\n Game Over!");
+            Console.WriteLine($"{player1.Name}: {player1.TotalScore} points");
+            Console.WriteLine($"{player2.Name}: {player2.TotalScore} points");
+
+            if (player1.TotalScore > player2.TotalScore)
+                Console.WriteLine($" {player1.Name} wins!");
+            else if (player2.TotalScore > player1.TotalScore)
+                Console.WriteLine($" {player2.Name} wins!");
+            else
+                Console.WriteLine(" It's a tie!");
+        }
+
+        public void PlayTurn(Player currentplayer)
         {
             rollsLeft = 3;
             bool[] keep = new bool[5];
@@ -61,28 +94,51 @@ namespace Yatzy_Spil
             }
 
             int[] finalDice = dice.ConvertAll(d => d.Value).ToArray();
-            Console.WriteLine("\nFinal dice:");
-            Console.WriteLine(string.Join(", ", finalDice));
+            var categoryNames = new Dictionary<string, string>
+            {
+                { "1", "Ones" },
+                { "2", "Twos" },
+                { "3", "Threes" },
+                { "4", "Fours" },
+                { "5", "Fives" },
+                { "6", "Sixes" },
+                { "7", "One Pair" },
+                { "8", "Two Pair" },
+                { "9", "Three of a Kind" },
+                { "10", "Four of a Kind" },
+                { "11", "Full House" },
+                { "12", "Small Straight" },
+                { "13", "Large Straight" },
+                { "14", "Chance" },
+                { "15", "Yatzy" }
+            };
 
-            Console.WriteLine("\nChoose a scoring category:");
-            Console.WriteLine("1 - Ones");
-            Console.WriteLine("2 - Twos");
-            Console.WriteLine("3 - Threes");
-            Console.WriteLine("4 - Fours");
-            Console.WriteLine("5 - Fives");
-            Console.WriteLine("6 - Sixes");
-            Console.WriteLine("7 - One Pair");
-            Console.WriteLine("8 - Two Pair");
-            Console.WriteLine("9 - Three of a Kind");
-            Console.WriteLine("10 - Four of a Kind");
-            Console.WriteLine("11 - Full House");
-            Console.WriteLine("12 - Small Straight");
-            Console.WriteLine("13 - Large Straight");
-            Console.WriteLine("14 - Chance");
-            Console.WriteLine("15 - Yatzy");
+            Console.WriteLine("\nUsed categories:");
+            foreach (var cat in currentplayer.UsedCategories)
+            {
+                Console.WriteLine($"- {categoryNames[cat]}");
+            }
+
+            Console.WriteLine("\nRemaining categories:");
+            foreach (var kvp in categoryNames)
+            {
+                if (!currentplayer.HasUsedCategory(kvp.Key))
+                {
+                    Console.WriteLine($"{kvp.Key} - {kvp.Value}");
+                }
+            }
+
 
             string choice = Console.ReadLine();
             int score = 0;
+
+            if (!categoryNames.ContainsKey(choice) || currentplayer.HasUsedCategory(choice))
+            {
+                Console.WriteLine("Invalid or already used category. Turn skipped.");
+                return;
+            }
+
+            int[] FinalDice = dice.ConvertAll(d => d.Value).ToArray();
 
             switch (choice)
             {
@@ -101,10 +157,24 @@ namespace Yatzy_Spil
                 case "13": score = YatzyScore.LargeStraight(finalDice); break;
                 case "14": score = YatzyScore.Chance(finalDice); break;
                 case "15": score = YatzyScore.Yatzy(finalDice); break;
-                default: Console.WriteLine("Invalid choice."); break;
             }
 
-            Console.WriteLine($"You scored {score} points.");
+            currentplayer.MarkCategoryUsed(choice);
+            if (int.TryParse(choice, out int numChoice) && numChoice >= 1 && numChoice <= 6)
+            {
+                currentplayer.AddUpperSectionScore(score);
+            }
+            else
+            {
+                currentplayer.AddScore(score);
+            }
+            Console.WriteLine($"{currentplayer.Name} scored {score} points. Total: {currentplayer.TotalScore}");
+
+            Console.WriteLine("\n--- Scoreboard ---");
+            Console.WriteLine($"{player1.Name}: {player1.TotalScore} points");
+            Console.WriteLine($"{player2.Name}: {player2.TotalScore} points");
+            Console.WriteLine("-------------------");
+
         }
     }
 }
