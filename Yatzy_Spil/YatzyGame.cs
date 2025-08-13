@@ -9,7 +9,7 @@ namespace Yatzy_Spil
     public class YatzyGame
     {
         private List<Dice> dice;
-        private int rollsLeft = 3;
+        private int rollsLeft = 5;
 
         private Player player1;
         private Player player2;
@@ -55,12 +55,12 @@ namespace Yatzy_Spil
 
         public void PlayTurn(Player currentplayer)
         {
-            rollsLeft = 3;
+            rollsLeft = 5;
             bool[] keep = new bool[5];
 
             while (rollsLeft > 0)
             {
-                Console.WriteLine($"\nRoll {4 - rollsLeft}:");
+                Console.WriteLine($"\nRoll {6 - rollsLeft}:");
 
                 for (int i = 0; i < dice.Count; i++)
                 {
@@ -79,9 +79,6 @@ namespace Yatzy_Spil
                     string input = Console.ReadLine();
                     if (!string.IsNullOrWhiteSpace(input))
                     {
-                        // Reset keep array
-                        Array.Fill(keep, false);
-
                         foreach (var part in input.Split())
                         {
                             if (int.TryParse(part, out int index) && index >= 1 && index <= 5)
