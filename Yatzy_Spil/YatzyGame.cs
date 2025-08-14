@@ -209,7 +209,7 @@ namespace Yatzy_Spil
                 { "12", YatzyScore.SmallStraight },
                 { "13", YatzyScore.LargeStraight },
                 { "14", YatzyScore.Chance },
-                { "15", YatzyScore.Yatzy }
+                { "15", YatzyScore.Yatzy },
             };
 
             foreach (var kvp in scoringMethods)
