@@ -110,6 +110,8 @@ namespace Yatzy_Spil
                 { "15", "Yatzy" }
             };
 
+            ShowSuggestedCategories(finalDice, currentplayer);
+
             Console.WriteLine("\nUsed categories:");
             foreach (var cat in currentplayer.UsedCategories)
             {
@@ -126,15 +128,28 @@ namespace Yatzy_Spil
             }
 
 
-            string choice = Console.ReadLine();
-            int score = 0;
-
-            if (!categoryNames.ContainsKey(choice) || currentplayer.HasUsedCategory(choice))
+            string choice;
+            while (true)
             {
-                Console.WriteLine("Invalid or already used category. Turn skipped.");
-                return;
+                Console.WriteLine("\nChoose a category by number:");
+                choice = Console.ReadLine();
+
+                if (!categoryNames.ContainsKey(choice))
+                {
+                    Console.WriteLine("Invalid category. Try again.");
+                    continue;
+                }
+
+                if (currentplayer.HasUsedCategory(choice))
+                {
+                    Console.WriteLine("Category already used. Try again.");
+                    continue;
+                }
+
+                break;
             }
 
+            int score = 0;
             int[] FinalDice = dice.ConvertAll(d => d.Value).ToArray();
 
             switch (choice)
@@ -172,6 +187,54 @@ namespace Yatzy_Spil
             Console.WriteLine($"{player2.Name}: {player2.TotalScore} points");
             Console.WriteLine("-------------------");
 
+        }
+
+        private void ShowSuggestedCategories(int[] dice, Player player)
+        {
+            var suggestions = new Dictionary<string, int>();
+
+            var scoringMethods = new Dictionary<string, Func<int[], int>>
+            {
+                { "1", YatzyScore.CalculateOnes },
+                { "2", YatzyScore.CalculateTwos },
+                { "3", YatzyScore.CalculateThrees },
+                { "4", YatzyScore.CalculateFours },
+                { "5", YatzyScore.CalculateFives },
+                { "6", YatzyScore.CalculateSixes },
+                { "7", YatzyScore.OnePair },
+                { "8", YatzyScore.TwoPair },
+                { "9", YatzyScore.ThreeOfAKind },
+                { "10", YatzyScore.FourOfAKind },
+                { "11", YatzyScore.FullHouse },
+                { "12", YatzyScore.SmallStraight },
+                { "13", YatzyScore.LargeStraight },
+                { "14", YatzyScore.Chance },
+                { "15", YatzyScore.Yatzy }
+            };
+
+            foreach (var kvp in scoringMethods)
+            {
+                if (!player.HasUsedCategory(kvp.Key))
+                {
+                    int score = kvp.Value(dice);
+                    if (score > 0)
+                    {
+                        suggestions[kvp.Key] = score;
+                    }
+                }
+            }
+            if (suggestions.Count > 0)
+            {
+                Console.WriteLine("\nSuggested categories based on your dice:");
+                foreach (var suggestion in suggestions.OrderByDescending(s => s.Value))
+                {
+                    Console.WriteLine($"{suggestion.Key} - {suggestion.Value} points");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No scoring options available for this roll.");
+            }
         }
     }
 }
